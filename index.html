@@ -105,15 +105,16 @@ img{max-width:100%;display:block;}
   9%{opacity:0;}
 }
 
-.loader-bolt{width:46px;height:76px;overflow:visible;filter:drop-shadow(0 0 10px var(--lime-glow));}
+.loader-bolt{width:44px;height:76px;overflow:visible;
+  filter:drop-shadow(0 0 6px var(--lime)) drop-shadow(0 0 22px var(--lime-glow));}
 .loader-bolt path{
   fill:none;
   stroke:var(--lime);
-  stroke-width:3;
+  stroke-width:2.5;
   stroke-linejoin:round;
   stroke-linecap:round;
-  stroke-dasharray:160;
-  stroke-dashoffset:160;
+  stroke-dasharray:172;
+  stroke-dashoffset:172;
   animation:boltDraw .55s cubic-bezier(.3,.9,.4,1) forwards, boltFlicker 1.4s ease-in .55s forwards;
 }
 @keyframes boltDraw{
@@ -675,7 +676,7 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
 <div id="loader">
   <div id="loader-flash"></div>
   <svg class="loader-bolt" viewBox="0 0 46 76" xmlns="http://www.w3.org/2000/svg">
-    <path d="M26 2 L6 42 L20 42 L14 74 L40 32 L24 32 Z" />
+    <path d="M27.7 4 L9 43.7 L22.1 43.7 L18.3 72 L37 26.7 L23.9 26.7 Z" />
   </svg>
   <div class="loader-mark">VOLTRA</div>
   <div class="loader-bar"></div>
