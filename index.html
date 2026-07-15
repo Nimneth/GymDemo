@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="VOLTRA Performance Studio">
 <meta property="og:title" content="VOLTRA — Premium Strength & Performance Studio in Colombo">
 <meta property="og:description" content="Elite coaching. Precision programming. Premium technology. Engineered for those who refuse to settle.">
-<meta property="og:image" content="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop">
+<meta property="og:image" content="assets/images/heroimg.png">
 <meta property="og:locale" content="en_LK">
 
 <!-- Structured Data -->
@@ -21,7 +21,7 @@
   "@context": "https://schema.org",
   "@type": "ExerciseGym",
   "name": "VOLTRA Performance Studio",
-  "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48",
+  "image": "assets/images/heroimg.png",
   "telephone": "+94763293869",
   "priceRange": "Rs. 3,500 - Rs. 18,000",
   "address": {
@@ -67,7 +67,10 @@ body{
   margin:0;background:var(--bg);color:var(--ink);
   font-family:'Inter',sans-serif;font-weight:400;
   overflow-x:hidden;-webkit-font-smoothing:antialiased;
-  cursor:auto;
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M4 2 L4 23 L9.5 18.5 L13 26 L16.5 24.5 L13 17 L20 17 Z' fill='%23c7ff2f' stroke='%23050505' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, auto;
+}
+a,button,.dot,.prog-card,summary,[role="button"],input[type="submit"],input[type="button"],label[for],select{
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='11' cy='11' r='7' fill='%23c7ff2f' fill-opacity='.25' stroke='%23c7ff2f' stroke-width='2'/%3E%3Ccircle cx='11' cy='11' r='2.5' fill='%23c7ff2f'/%3E%3C/svg%3E") 11 11, pointer;
 }
 h1,h2,h3,h4,.font-display{font-family:'Space Grotesk',sans-serif;}
 .font-mono{font-family:'JetBrains Mono',monospace;}
@@ -84,12 +87,46 @@ img{max-width:100%;display:block;}
 }
 
 /* ---------- Loader ---------- */
-#loader{position:fixed;inset:0;background:#050505;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .7s ease, visibility .7s ease;}
+#loader{position:fixed;inset:0;background:#050505;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .7s ease, visibility .7s ease;overflow:hidden;}
 #loader.hide{opacity:0;visibility:hidden;}
 .loader-mark{font-family:'Space Grotesk';font-weight:700;font-size:14px;letter-spacing:.35em;color:var(--ink-dim);}
 .loader-bar{width:180px;height:2px;background:var(--line);position:relative;overflow:hidden;border-radius:2px;}
 .loader-bar::after{content:'';position:absolute;inset:0;background:var(--lime);width:0%;animation:loadbar 1.4s ease forwards;}
 @keyframes loadbar{to{width:100%;}}
+
+/* Lightning strike */
+#loader-flash{position:absolute;inset:0;background:var(--lime);opacity:0;pointer-events:none;
+  animation:loaderFlash 1.4s ease-out forwards;}
+@keyframes loaderFlash{
+  0%,100%{opacity:0;}
+  3%{opacity:.9;}
+  5%{opacity:0;}
+  7%{opacity:.5;}
+  9%{opacity:0;}
+}
+
+.loader-bolt{width:46px;height:76px;overflow:visible;filter:drop-shadow(0 0 10px var(--lime-glow));}
+.loader-bolt path{
+  fill:none;
+  stroke:var(--lime);
+  stroke-width:3;
+  stroke-linejoin:round;
+  stroke-linecap:round;
+  stroke-dasharray:160;
+  stroke-dashoffset:160;
+  animation:boltDraw .55s cubic-bezier(.3,.9,.4,1) forwards, boltFlicker 1.4s ease-in .55s forwards;
+}
+@keyframes boltDraw{
+  to{stroke-dashoffset:0;}
+}
+@keyframes boltFlicker{
+  0%{opacity:1;fill:var(--lime);}
+  8%{opacity:.3;}
+  16%{opacity:1;}
+  24%{opacity:.4;}
+  32%{opacity:1;fill:var(--lime);}
+  100%{opacity:1;fill:var(--lime);}
+}
 
 /* ---------- Scroll progress ---------- */
 #scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--lime);z-index:150;width:0%;box-shadow:0 0 8px var(--lime-glow);}
@@ -137,7 +174,7 @@ img{max-width:100%;display:block;}
 
 /* ---------- Type helpers ---------- */
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono';font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--lime);}
-.eyebrow::before{content:'';width:22px;height:1px;background:var(--lime);}
+.eyebrow::before{width:22px;height:1px;background:var(--lime);}
 .h-display{font-family:'Space Grotesk';font-weight:700;line-height:.98;letter-spacing:-.02em;}
 .text-gradient{background:linear-gradient(180deg,#fff,#83837c);-webkit-background-clip:text;background-clip:text;color:transparent;}
 .text-lime{color:var(--lime);}
@@ -180,9 +217,333 @@ img{max-width:100%;display:block;}
 .brand-mark{font-family:'Space Grotesk';font-weight:700;font-size:22px;color:var(--ink-faint);letter-spacing:.02em;white-space:nowrap;transition:color .3s ease;}
 .brand-mark:hover{color:var(--ink);}
 
-/* ---------- Programs image hover ---------- */
-.prog-img{filter:grayscale(1) contrast(1.1);transition:filter .6s ease,transform .8s cubic-bezier(.2,.9,.3,1);}
-.prog-card:hover .prog-img{filter:grayscale(0) contrast(1.05);transform:scale(1.06);}
+/* ==========================
+PROGRAMS
+========================== */
+
+.prog-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:40px;
+    margin-bottom:48px;
+    flex-wrap:wrap;
+}
+
+.prog-header p{
+    max-width:420px;
+}
+
+/* ---------- Slider ---------- */
+
+.programs-slider{
+    overflow:hidden;
+    width:100%;
+}
+
+.programs-track{
+
+    display:flex;
+    gap:24px;
+
+    overflow-x:auto;
+    overflow-y:hidden;
+
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+
+    -webkit-overflow-scrolling:touch;
+
+    padding-bottom:8px;
+
+}
+
+/* Snap fights tiny per-frame autoplay increments, so it's disabled
+   while autoplay is running and re-enabled on user interaction. */
+.programs-track.is-autoplaying{
+    scroll-snap-type:none;
+    scroll-behavior:auto;
+}
+
+.programs-track::-webkit-scrollbar{
+    display:none;
+}
+
+.programs-track{
+    scrollbar-width:none;
+}
+
+/* ---------- Cards ---------- */
+
+.prog-card{
+
+    position:relative;
+
+    flex:0 0 340px;
+
+    height:420px;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    scroll-snap-align:center;
+
+    display:block;
+
+    transition:.45s;
+
+}
+
+.prog-large{
+    flex-basis:520px;
+}
+
+.prog-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.prog-card>div:first-child{
+
+    position:absolute;
+    inset:0;
+
+}
+
+.prog-card img{
+
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+    transition:transform .8s;
+
+}
+
+.prog-card:hover img{
+
+    transform:scale(1.08);
+
+}
+
+.prog-card>div:first-child::after{
+
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,.85),
+        rgba(0,0,0,.25) 55%,
+        transparent
+    );
+
+}
+
+.prog-card>div:last-child{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    z-index:5;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:24px;
+
+}
+
+.prog-card h3{
+
+    margin:0;
+
+    color:#fff;
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+.prog-card svg{
+
+    width:42px;
+    height:42px;
+
+    padding:10px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.12);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    transition:.3s;
+
+}
+
+.prog-card:hover svg{
+
+    background:var(--lime);
+
+    color:#000;
+
+    transform:translateX(4px);
+
+}
+
+/* ---------- Laptop ---------- */
+
+@media(max-width:1200px){
+
+.prog-card{
+
+    flex-basis:300px;
+    height:380px;
+
+}
+
+.prog-large{
+
+    flex-basis:440px;
+
+}
+
+}
+
+/* ---------- Tablet ---------- */
+
+@media(max-width:768px){
+
+.prog-header{
+
+    flex-direction:column;
+    align-items:flex-start;
+
+}
+
+.programs-track{
+
+    gap:16px;
+
+}
+
+.prog-card{
+
+    flex:0 0 88%;
+
+    height:320px;
+
+}
+
+.prog-large{
+
+    flex-basis:88%;
+
+}
+
+}
+
+/* ---------- Mobile ---------- */
+
+@media(max-width:480px){
+
+.prog-card{
+
+    flex-basis:92%;
+
+    height:280px;
+
+}
+
+.prog-card h3{
+
+    font-size:19px;
+
+}
+
+.prog-card>div:last-child{
+
+    padding:18px;
+
+}
+
+}
+
+/* ===================================
+   Slider Progress Indicator
+=================================== */
+
+.prog-indicator{
+
+    width:220px;
+    height:4px;
+
+    margin:36px auto 0;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+}
+
+.prog-progress{
+
+    width:20%;
+    height:100%;
+
+    background:var(--lime);
+
+    border-radius:999px;
+
+    transition:transform .35s ease;
+
+    box-shadow:0 0 14px var(--lime-glow);
+
+}
+
+.prog-dots{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin:36px auto 0;
+}
+
+.prog-dots .dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--line-strong);
+    transition:all .4s ease;
+    cursor:pointer;
+    border:none;
+    padding:0;
+}
+
+.prog-dots .dot.active{
+    background:var(--lime);
+    width:24px;
+    border-radius:4px;
+    box-shadow:0 0 10px var(--lime-glow);
+}
+
+.prog-dots .dot:hover{
+    background:var(--lime);
+    opacity:.7;
+}
 
 /* ---------- Pricing ---------- */
 .toggle-wrap{display:inline-grid;grid-template-columns:1fr 1fr;align-items:stretch;background:var(--surface);border:1px solid var(--line-strong);border-radius:100px;padding:5px;position:relative;max-width:100%;width:min(100%,380px);}
@@ -311,7 +672,14 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
 </svg>
 
 <div class="grain"></div>
-<div id="loader"><div class="loader-mark">VOLTRA</div><div class="loader-bar"></div></div>
+<div id="loader">
+  <div id="loader-flash"></div>
+  <svg class="loader-bolt" viewBox="0 0 46 76" xmlns="http://www.w3.org/2000/svg">
+    <path d="M26 2 L6 42 L20 42 L14 74 L40 32 L24 32 Z" />
+  </svg>
+  <div class="loader-mark">VOLTRA</div>
+  <div class="loader-bar"></div>
+</div>
 <div id="scroll-progress"></div>
 <div id="cursor-glow"></div>
 
@@ -383,7 +751,7 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
     </div>
 
     <div class="hero-figure" style="margin-top:64px;" data-reveal>
-      <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=900&auto=format&fit=crop" alt="VOLTRA athlete training with strength equipment" style="border-radius:24px;width:100%;aspect-ratio:4/5;object-fit:cover;">
+      <img src="assets/images/heroimg.png" alt="VOLTRA athlete training with strength equipment" style="border-radius:24px;width:100%;aspect-ratio:4/5;object-fit:cover;">
 
       <div class="stat-chip" style="top:6%;left:-4%;" data-float="1">
         <div class="num"><span class="counter" data-target="12" data-suffix="K+">0</span></div>
@@ -490,64 +858,164 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
 
 <!-- PROGRAMS -->
 <section class="section" id="programs" style="background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
-  <div class="container">
-    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:56px;" data-reveal>
-      <div>
-        <span class="eyebrow">Train Smarter</span>
-        <h2 class="h-display" style="font-size:clamp(30px,4.5vw,52px);margin-top:18px;">Unleash Your <span class="text-lime">Potential</span></h2>
-      </div>
-      <p class="muted" style="max-width:400px;font-size:15px;">Six focused disciplines, each led by specialist coaches and backed by real programming — no cookie-cutter circuits.</p>
-    </div>
+    <div class="container">
 
-    <div style="display:grid;grid-template-columns:repeat(1,1fr);gap:24px;" class="prog-grid">
-      <a href="#membership" class="prog-card card" style="overflow:hidden;grid-column:span 2;" data-reveal>
-        <div style="position:relative;aspect-ratio:16/10;overflow:hidden;">
-          <img class="prog-img" src="https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?q=80&w=1200&auto=format&fit=crop" alt="Strength training at VOLTRA" style="width:100%;height:100%;object-fit:cover;">
+          <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:64px;" data-reveal>
+          <span class="eyebrow">Train Smarter</span>
+          <h2 class="h-display" style="font-size:clamp(30px,4.5vw,52px);margin-top:18px;">Unleash Your <span class="text-lime">Potential</span></h2>
+          <p class="muted" style="max-width:520px;margin-top:16px;font-size:16px;">Six focused disciplines, each led by specialist coaches and backed by real programming.</p>
         </div>
-        <div style="padding:24px;display:flex;justify-content:space-between;align-items:center;">
-          <h3 style="font-size:20px;font-weight:600;">Strength Training</h3>
-          <svg width="18" height="18" style="color:var(--lime)"><use href="#i-chevright"/></svg>
-        </div>
-      </a>
-      <a href="#membership" class="prog-card card" style="overflow:hidden;" data-reveal>
-        <div style="position:relative;aspect-ratio:4/3;overflow:hidden;">
-          <img class="prog-img" src="https://images.unsplash.com/photo-1434682772747-f16d3ea162c3?q=80&w=900&auto=format&fit=crop" alt="Cardio fitness training" style="width:100%;height:100%;object-fit:cover;">
-        </div>
-        <div style="padding:22px;display:flex;justify-content:space-between;align-items:center;">
-          <h3 style="font-size:18px;font-weight:600;">Cardio Fitness</h3>
-          <svg width="16" height="16" style="color:var(--lime)"><use href="#i-chevright"/></svg>
-        </div>
-      </a>
-      <a href="#membership" class="prog-card card" style="overflow:hidden;" data-reveal>
-        <div style="position:relative;aspect-ratio:4/3;overflow:hidden;">
-          <img class="prog-img" src="https://images.unsplash.com/photo-1584735175315-9d5df23860e6?q=80&w=900&auto=format&fit=crop" alt="HIIT and functional training" style="width:100%;height:100%;object-fit:cover;">
-        </div>
-        <div style="padding:22px;display:flex;justify-content:space-between;align-items:center;">
-          <h3 style="font-size:18px;font-weight:600;">Cross Training</h3>
-          <svg width="16" height="16" style="color:var(--lime)"><use href="#i-chevright"/></svg>
-        </div>
-      </a>
-      <a href="#membership" class="prog-card card" style="overflow:hidden;" data-reveal>
-        <div style="position:relative;aspect-ratio:4/3;overflow:hidden;">
-          <img class="prog-img" src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?q=80&w=900&auto=format&fit=crop" alt="Women's fitness program" style="width:100%;height:100%;object-fit:cover;">
-        </div>
-        <div style="padding:22px;display:flex;justify-content:space-between;align-items:center;">
-          <h3 style="font-size:18px;font-weight:600;">Women's Fitness</h3>
-          <svg width="16" height="16" style="color:var(--lime)"><use href="#i-chevright"/></svg>
-        </div>
-      </a>
-      <a href="#membership" class="prog-card card" style="overflow:hidden;grid-column:span 2;" data-reveal>
-        <div style="position:relative;aspect-ratio:16/10;overflow:hidden;">
-          <img class="prog-img" src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=1200&auto=format&fit=crop" alt="Body transformation coaching" style="width:100%;height:100%;object-fit:cover;">
-        </div>
-        <div style="padding:24px;display:flex;justify-content:space-between;align-items:center;">
-          <h3 style="font-size:20px;font-weight:600;">Body Transformation</h3>
-          <svg width="18" height="18" style="color:var(--lime)"><use href="#i-chevright"/></svg>
-        </div>
-      </a>
+
+        <div class="programs-slider">
+
+            <div class="programs-track">
+
+        <!-- Strength -->
+        <a href="#membership" class="prog-card prog-large card">
+
+            <div>
+                <img
+                    src="https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?q=80&w=1200&auto=format&fit=crop"
+                    alt="Strength Training">
+            </div>
+
+            <div>
+                <h3>Strength Training</h3>
+
+                <svg width="18" height="18">
+                    <use href="#i-chevright"/>
+                </svg>
+            </div>
+
+        </a>
+
+
+        <!-- Cardio -->
+        <a href="#membership" class="prog-card card">
+
+            <div>
+                <img
+                    src="https://images.unsplash.com/photo-1434682772747-f16d3ea162c3?q=80&w=900&auto=format&fit=crop"
+                    alt="Cardio Fitness">
+            </div>
+
+            <div>
+                <h3>Cardio Fitness</h3>
+
+                <svg width="18" height="18">
+                    <use href="#i-chevright"/>
+                </svg>
+            </div>
+
+        </a>
+
+
+        <!-- Cross Training -->
+        <a href="#membership" class="prog-card card">
+
+            <div>
+                <img
+                    src="https://images.unsplash.com/photo-1584735175315-9d5df23860e6?q=80&w=900&auto=format&fit=crop"
+                    alt="Cross Training">
+            </div>
+
+            <div>
+                <h3>Cross Training</h3>
+
+                <svg width="18" height="18">
+                    <use href="#i-chevright"/>
+                </svg>
+            </div>
+
+        </a>
+
+
+        <!-- Women's Fitness -->
+        <a href="#membership" class="prog-card card">
+
+            <div>
+                <img
+                    src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?q=80&w=900&auto=format&fit=crop"
+                    alt="Women's Fitness">
+            </div>
+
+            <div>
+                <h3>Women's Fitness</h3>
+
+                <svg width="18" height="18">
+                    <use href="#i-chevright"/>
+                </svg>
+            </div>
+
+        </a>
+
+
+        <!-- Body Transformation -->
+        <a href="#membership" class="prog-card prog-large card">
+
+            <div>
+                <img
+                    src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=1200&auto=format&fit=crop"
+                    alt="Body Transformation">
+            </div>
+
+            <div>
+                <h3>Body Transformation</h3>
+
+                <svg width="18" height="18">
+                    <use href="#i-chevright"/>
+                </svg>
+            </div>
+
+        </a>
+
+
+        <!-- Personal Training -->
+        <a href="#membership" class="prog-card card">
+
+            <div>
+                <img
+                    src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=900&auto=format&fit=crop"
+                    alt="Personal Training">
+            </div>
+
+            <div>
+                <h3>Personal Training</h3>
+
+                <svg width="18" height="18">
+                    <use href="#i-chevright"/>
+                </svg>
+            </div>
+
+        </a>
+
+
+        <!-- Weight Loss -->
+        <a href="#membership" class="prog-card card">
+
+            <div>
+                <img
+                    src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=900&auto=format&fit=crop"
+                    alt="Weight Loss">
+            </div>
+
+            <div>
+                <h3>Weight Loss</h3>
+
+                <svg width="18" height="18">
+                    <use href="#i-chevright"/>
+                </svg>
+            </div>
+
+        </a>
+
     </div>
-  </div>
+<div class="prog-dots" id="programs-dots"></div>
+        </div>
+
+    </div>
 </section>
+
 <style>@media(min-width:768px){.prog-grid{grid-template-columns:repeat(4,1fr) !important;}}</style>
 
 <!-- MEMBERSHIP / PRICING -->
@@ -736,24 +1204,60 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
       <span class="eyebrow" style="justify-content:center;">Inside VOLTRA</span>
       <h2 class="h-display" style="font-size:clamp(30px,4.5vw,52px);margin-top:18px;">The <span class="text-lime">Studio Floor</span></h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;" class="gallery-grid">
-      <div class="gallery-item" style="grid-row:span 2;" data-reveal><img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=800&auto=format&fit=crop" alt="VOLTRA weight room"><span class="gallery-cap">Strength Floor</span></div>
-      <div class="gallery-item" data-reveal><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=700&auto=format&fit=crop" alt="Athlete training"><span class="gallery-cap">Free Weights</span></div>
-      <div class="gallery-item" data-reveal><img src="https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?q=80&w=700&auto=format&fit=crop" alt="Premium dumbbell rack"><span class="gallery-cap">Equipment</span></div>
-      <div class="gallery-item" style="grid-column:span 2;" data-reveal><img src="https://images.unsplash.com/photo-1495805442109-bf1cf975750b?q=80&w=1200&auto=format&fit=crop" alt="Group training class"><span class="gallery-cap">Group Classes</span></div>
-      <div class="gallery-item" data-reveal><img src="https://images.unsplash.com/photo-1550345332-09e3ac987658?q=80&w=700&auto=format&fit=crop" alt="Studio interior"><span class="gallery-cap">The Studio</span></div>
-      <div class="gallery-item" data-reveal><img src="https://images.unsplash.com/photo-1618355776464-8666794d2520?q=80&w=700&auto=format&fit=crop" alt="Coached training session"><span class="gallery-cap">Coached Sessions</span></div>
+    <div class="gallery-grid">
+      <div class="gallery-item g-hero" data-reveal><img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=800&auto=format&fit=crop" alt="VOLTRA weight room"><span class="gallery-cap">Strength Floor</span></div>
+      <div class="gallery-item g-weights" data-reveal><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=700&auto=format&fit=crop" alt="Athlete training"><span class="gallery-cap">Free Weights</span></div>
+      <div class="gallery-item g-equipment" data-reveal><img src="https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?q=80&w=700&auto=format&fit=crop" alt="Premium dumbbell rack"><span class="gallery-cap">Equipment</span></div>
+      <div class="gallery-item g-banner" data-reveal><img src="https://images.unsplash.com/photo-1434682772747-f16d3ea162c3?q=80&w=1400&auto=format&fit=crop" alt="Group training class"><span class="gallery-cap">Group Classes</span></div>
+      <div class="gallery-item g-studio" data-reveal><img src="https://images.unsplash.com/photo-1550345332-09e3ac987658?q=80&w=800&auto=format&fit=crop" alt="Studio interior"><span class="gallery-cap">The Studio</span></div>
+      <div class="gallery-item g-coach" data-reveal><img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=800&auto=format&fit=crop" alt="Coached training session"><span class="gallery-cap">Coached Sessions</span></div>
     </div>
   </div>
 </section>
-<style>@media(min-width:768px){.gallery-grid{grid-template-columns:repeat(4,1fr) !important;}}
+<style>
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
 .gallery-item{aspect-ratio:1;}
-.gallery-item[style*="grid-row:span 2"]{aspect-ratio:auto;}
-.gallery-item[style*="grid-column:span 2"]{aspect-ratio:auto;}
+
+/* Mobile: hero and banner get extra breathing room, everything else stays square */
+.g-hero{grid-column:span 2;aspect-ratio:4/3;}
+.g-banner{grid-column:span 2;aspect-ratio:16/9;}
+
 @media(min-width:768px){
-  .gallery-item[style*="grid-row:span 2"]{aspect-ratio:1/2.15;}
-  .gallery-item[style*="grid-column:span 2"]{aspect-ratio:2.15/1;}
-}</style>
+  .gallery-grid{
+      grid-template-columns:repeat(4,1fr);
+      grid-template-rows:repeat(4,minmax(140px,1fr));
+      grid-auto-flow:dense;
+  }
+  .gallery-item{aspect-ratio:auto;}
+
+  /* Deliberate editorial mosaic:
+     tall hero anchors the left, two even squares sit top-right of it,
+     a wide banner runs beneath them, and two closing tiles sit along
+     the bottom edge. */
+  .g-hero{grid-column:1/3;grid-row:1/4;}
+  .g-weights{grid-column:3/4;grid-row:1/2;}
+  .g-equipment{grid-column:4/5;grid-row:1/2;}
+  .g-banner{grid-column:3/5;grid-row:2/4;}
+  .g-studio{grid-column:1/3;grid-row:4/5;}
+  .g-coach{grid-column:3/5;grid-row:4/5;}
+}
+
+@media(min-width:1024px){
+  .gallery-grid{
+      grid-template-rows:repeat(2,minmax(180px,1fr));
+  }
+  .g-hero{grid-column:1/2;grid-row:1/3;}
+  .g-weights{grid-column:2/3;grid-row:1/2;}
+  .g-equipment{grid-column:2/3;grid-row:2/3;}
+  .g-banner{grid-column:3/5;grid-row:1/2;}
+  .g-studio{grid-column:3/4;grid-row:2/3;}
+  .g-coach{grid-column:4/5;grid-row:2/3;}
+}
+</style>
 
 <!-- TESTIMONIALS -->
 <section class="section" id="testimonials">
@@ -929,6 +1433,8 @@ window.addEventListener('load',()=>{
   setTimeout(()=>document.getElementById('loader').classList.add('hide'),1500);
 });
 
+
+
 /* Sticky nav */
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{
@@ -983,6 +1489,8 @@ if(window.gsap){
   gsap.registerPlugin(ScrollTrigger);
   gsap.to('.pulse-path',{strokeDashoffset:0,ease:'none',scrollTrigger:{trigger:'.pulse-wrap',start:'top 90%',end:'bottom 60%',scrub:1}});
 }
+
+
 
 /* Counters */
 const counters=document.querySelectorAll('.counter');
@@ -1039,6 +1547,140 @@ function buildDots(){
     dotsWrap.appendChild(d);
   }
 }
+
+/* ===================================
+   Premium Auto Scroll Programs Slider
+=================================== */
+
+const programsTrack = document.querySelector(".programs-track");
+const programsCards = Array.from(programsTrack.querySelectorAll(".prog-card"));
+const programsDotsWrap = document.getElementById("programs-dots");
+
+let programsSpeed = 0.6; // adjust speed (lower = slower)
+let programsPaused = false;
+let programsActiveIndex = 0;
+let programsSyncing = false; // true while we're driving scroll programmatically
+let programsResumeTimer = null;
+
+// Build one dot per card
+programsCards.forEach((card, i) => {
+    const dot = document.createElement("button");
+    dot.className = "dot" + (i === 0 ? " active" : "");
+    dot.type = "button";
+    dot.setAttribute("aria-label", "Go to " + (card.querySelector("h3")?.textContent || "slide " + (i + 1)));
+    dot.addEventListener("click", () => {
+        programsPaused = true;
+        goToProgramsCard(i);
+        clearTimeout(programsResumeTimer);
+        programsResumeTimer = setTimeout(() => {
+            programsPaused = false;
+        }, 2000);
+    });
+    programsDotsWrap.appendChild(dot);
+});
+
+const programsDots = Array.from(programsDotsWrap.querySelectorAll(".dot"));
+
+function setActiveProgramsDot(i){
+    if(i === programsActiveIndex) return;
+    programsActiveIndex = i;
+    programsDots.forEach((d, idx) => d.classList.toggle("active", idx === i));
+}
+
+function goToProgramsCard(i){
+    const card = programsCards[i];
+    if(!card) return;
+    programsSyncing = true;
+    const target = card.offsetLeft - (programsTrack.clientWidth - card.clientWidth) / 2;
+    programsTrack.scrollTo({ left: target, behavior: "smooth" });
+    setActiveProgramsDot(i);
+    setTimeout(() => { programsSyncing = false; }, 600);
+}
+
+function nextProgramsCard(){
+    const next = (programsActiveIndex + 1) % programsCards.length;
+    goToProgramsCard(next);
+}
+
+function updateProgramsIndicator(){
+    if(programsSyncing) return;
+    // Find the card whose center is closest to the track's visible center
+    const trackCenter = programsTrack.scrollLeft + programsTrack.clientWidth / 2;
+    let closest = 0;
+    let closestDist = Infinity;
+    programsCards.forEach((card, i) => {
+        const cardCenter = card.offsetLeft + card.clientWidth / 2;
+        const dist = Math.abs(cardCenter - trackCenter);
+        if(dist < closestDist){
+            closestDist = dist;
+            closest = i;
+        }
+    });
+    setActiveProgramsDot(closest);
+}
+
+
+function autoScrollPrograms(){
+
+    if(!programsPaused){
+
+        programsTrack.classList.add("is-autoplaying");
+
+        programsTrack.scrollLeft += programsSpeed;
+
+        // Infinite loop
+        if(
+            programsTrack.scrollLeft >= 
+            programsTrack.scrollWidth - programsTrack.clientWidth
+        ){
+
+            programsTrack.scrollLeft = 0;
+
+        }
+
+        // Update progress indicator
+        updateProgramsIndicator();
+
+    } else {
+        programsTrack.classList.remove("is-autoplaying");
+    }
+
+    requestAnimationFrame(autoScrollPrograms);
+
+}
+
+
+autoScrollPrograms();
+
+// Keep dots in sync with manual scrolling (touch/trackpad/drag) too
+programsTrack.addEventListener("scroll", () => {
+    updateProgramsIndicator();
+});
+
+
+// Pause when user interacts
+programsTrack.addEventListener("mouseenter",()=>{
+    programsPaused = true;
+});
+
+
+programsTrack.addEventListener("mouseleave",()=>{
+    programsPaused = false;
+});
+
+
+// Mobile touch support
+programsTrack.addEventListener("touchstart",()=>{
+    programsPaused = true;
+});
+
+
+programsTrack.addEventListener("touchend",()=>{
+    setTimeout(()=>{
+        programsPaused = false;
+    },1500);
+});
+
 function updateTesti(){
   const perView=getPerView();
   const max=Math.max(slides.length-perView,0);
@@ -1074,6 +1716,7 @@ function calcBMI(){
   fg.style.stroke=color;
 }
 calcBMI();
+
 </script>
 </body>
 </html>
